@@ -58,8 +58,12 @@ WSGI_APPLICATION = 'Heart_Fat.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django_mongodb_engine',
-        'NAME': 'HeartDb'
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'heartdb',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': ''
     }
 }
 
