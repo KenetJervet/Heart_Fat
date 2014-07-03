@@ -10,7 +10,6 @@ install:
   - pip install https://github.com/dcramer/pyflakes/tarball/master
   - pip install -q -e . --use-mirrors
 before_script:
-  - pyflakes -x W src
   - psql -c 'create database heartdb;' -U postgres
 script:
   - python manage.py test
