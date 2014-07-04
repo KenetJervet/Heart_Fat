@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block body %}
+    <div class="inner cover" ng-view>
+    </div>
+{% endblock %}
+
+{% block headerscripts %}
+    <script src="{% static 'Heart_Fat_App/js/heart_fat_controllers.js' %}"></script>
+{% endblock %}

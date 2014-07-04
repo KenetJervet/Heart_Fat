@@ -90,7 +90,7 @@ BOWER_COMPONENTS_ROOT = os.path.join(BASE_DIR, 'components')
 
 BOWER_INSTALLED_APPS = (
     'jquery',
-    'angularjs',
+    'angular-seed',
     'bootstrap',
 )
 
@@ -99,7 +99,14 @@ BOWER_INSTALLED_APPS = (
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     'djangobower.finders.BowerFinder',
+)
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
 )
 
 STATIC_URL = '/static/'
