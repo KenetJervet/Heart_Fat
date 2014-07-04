@@ -5,10 +5,12 @@ python:
 env:
   - DJANGO=1.6
 install:
+  - npm install -g bower
   - pip install -q Django==$DJANGO --use-mirrors
   - pip install pep8 --use-mirrors
   - pip install https://github.com/dcramer/pyflakes/tarball/master
   - pip install -q -e . --use-mirrors
+  - pip install -q
 before_script:
   - psql -c 'create database heartdb;' -U postgres
 script:
