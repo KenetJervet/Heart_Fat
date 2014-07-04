@@ -1,14 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Heart Fat</title>
+    <link href="{% static 'bootstrap/dist/css/bootstrap.cs' %}">
     {% block styles %}{% endblock %}
     {% block headerscripts %}{% endblock %}
 </head>
 <body>
 BASE
 {% block body %}{% endblock %}
+
+<script src="{% static 'jquery/dist/jquery.js' %}"></script>
+<script src="{% static 'bootstrap/dist/js/bootstrap.js' %}"></script>
+<script src="{% static 'angularjs/angularjs.js' %}"></script>
 {% block scripts %}{% endblock %}
 </body>
 </html>
