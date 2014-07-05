@@ -8,6 +8,7 @@ install:
   - npm install -g bower
   - pip install -q django-bower
   - pip install -q Django==$DJANGO --use-mirrors
+  - pip install -q djangorestframework
   - pip install pep8 --use-mirrors
   - pip install https://github.com/dcramer/pyflakes/tarball/master
   - pip install -q -e . --use-mirrors
