@@ -1,14 +1,16 @@
-<form role="form">
+<h1>Uncover the magic</h1>
+
+<form novalidate="" role="form" class="login-form">
     <div class="form-group">
-        <input class="form-control" type="email" placeholder="Enter email">
+        <input type="text" class="form-control" required ng-model="loginInfo.username" placeholder="Username">
     </div>
     <div class="form-group">
-        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+        <input type="password" class="form-control" required ng-model="loginInfo.password" placeholder="Password">
     </div>
     <div class="checkbox">
         <label>
             <input type="checkbox"> Remember me
         </label>
     </div>
-    <button type="submit" class="btn btn-default">Log in</button>
+    <button type="submit" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-play"></span></button>
 </form>

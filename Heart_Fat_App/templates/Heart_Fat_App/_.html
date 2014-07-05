@@ -2,11 +2,19 @@
 
 {% load staticfiles %}
 
+{% block styles %}
+    <link href="{% static 'Heart_Fat_App/css/heart_fat_app.css' %}" rel="stylesheet">
+    <link href="{% static 'Heart_Fat_App/css/heart_fat_animations.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block body %}
-    <div class="inner cover" ng-view>
+    <div class="view-container">
+        <div class="inner cover" ng-view class="view-frame">
+        </div>
     </div>
 {% endblock %}
 
 {% block headerscripts %}
     <script src="{% static 'Heart_Fat_App/js/heart_fat_controllers.js' %}"></script>
+    <script src="{% static 'Heart_Fat_App/js/heart_fat_animations.js' %}"></script>
 {% endblock %}
