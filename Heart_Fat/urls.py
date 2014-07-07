@@ -12,9 +12,9 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', TemplateView.as_view(template_name='Heart_Fat_App/_.html')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^app/', include('Heart_Fat_App.urls', namespace='Heart_Fat_App')),
-    url(r'^app/', include('api.urls', namespace='api'))
+    url(r'^api/', include('api.urls', namespace='api')),
+    url(r'^.*$', TemplateView.as_view(template_name='Heart_Fat_App/_.html')),
 )
