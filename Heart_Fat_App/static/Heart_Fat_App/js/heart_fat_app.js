@@ -45,7 +45,7 @@ heartFatApp.config(['$interpolateProvider', function ($interpolateProvider) {
     $interpolateProvider.endSymbol('=}');
 }]);
 
-heartFatApp.config(['$routeProvider', function ($routeProvider) {
+heartFatApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
     $routeProvider.
         when('/index', {
             templateUrl: '/app/index',
@@ -58,6 +58,8 @@ heartFatApp.config(['$routeProvider', function ($routeProvider) {
         otherwise({
             redirectTo: '/index'
         });
+
+    $locationProvider.html5Mode(true);
 }]);
 
 
