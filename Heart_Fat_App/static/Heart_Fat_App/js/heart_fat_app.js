@@ -6,6 +6,7 @@ var static_prefix = $(document).data('static_prefix');
 
 var heartFatApp = angular.module('heartFatApp', [
     'ngRoute',
+    'ngCookies',
     'heartFatControllers',
     'heartFatAnimations'
 ]);
@@ -34,42 +35,43 @@ heartFatApp.factory('authInterceptor', ['$log', function ($log) {
     return authInterceptor;
 }]);
 
-heartFatApp.config(['$httpProvider', function ($httpProvider) {
-    //$httpProvider.interceptors.push('authInterceptor')
-}]);
+heartFatApp.config(['$httpProvider',
+    '$interpolateProvider',
+    '$routeProvider',
+    '$locationProvider',
+    function ($httpProvider, $interpolateProvider, $routeProvider, $locationProvider) {
+        $interpolateProvider.startSymbol('{=');
+        $interpolateProvider.endSymbol('=}');
 
-// configure existing services inside initialization blocks.
-heartFatApp.config(['$interpolateProvider', function ($interpolateProvider) {
-    // Configure existing providers
-    $interpolateProvider.startSymbol('{=');
-    $interpolateProvider.endSymbol('=}');
-}]);
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
-heartFatApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-    $routeProvider.
-        when('/index', {
-            templateUrl: '/app/index',
-            controller: 'HeartFatIndexCtrl'
-        }).
-        when('/login', {
-            templateUrl: '/app/login',
-            controller: 'HeartFatLoginCtrl'
-        }).
-        otherwise({
-            redirectTo: '/index'
+        $routeProvider.
+            when('/index', {
+                templateUrl: '/app/index',
+                controller: 'HeartFatIndexCtrl'
+            }).
+            when('/login', {
+                templateUrl: '/app/login',
+                controller: 'HeartFatLoginCtrl'
+            }).
+            otherwise({
+                redirectTo: '/index'
+            });
+
+        $locationProvider.html5Mode(true);
+    }]);
+
+
+heartFatApp.run(['$rootScope', '$location', '$cookies', '$http', 'auth',
+    function ($rootScope, $location, $cookies, $http, auth) {
+        $rootScope.$on('$routeChangeStart', function (event) {
+            if (!auth.isLoggedIn()) {
+                event.preventDefault();
+                $location.path('/login');
+            }
         });
 
-    $locationProvider.html5Mode(true);
-}]);
-
-
-heartFatApp.run(['$rootScope', '$location', 'auth', function ($rootScope, $location, auth) {
-    $rootScope.$on('$routeChangeStart', function (event) {
-        if (!auth.isLoggedIn()) {
-            console.log('Access denied.');
-            event.preventDefault();
-            $location.path('/login');
-        }
-    });
-}]);
+        $http.defaults.headers.post['X-CSRFToken'] = $cookies.csrftoken;
+    }]);
 

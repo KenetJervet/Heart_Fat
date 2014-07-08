@@ -6,22 +6,22 @@ var heartFatControllers = angular.module('heartFatControllers', [
 
 ]);
 
-heartFatControllers.controller('HeartFatIndexCtrl', ['$scope', '$http', '$ngAnimate',
+heartFatControllers.controller('HeartFatIndexCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
     }
 ])
 
-heartFatControllers.controller('HeartFatLoginCtrl', ['$scope', '$http', '$ngAnimate',
-    function ($scope, $http) {
-        // Todo:
-        $scope.loginInfo = {};
-
-        $scope.login = function (loginInfo) {
-            $http.post('#/login/validate', loginInfo).
+heartFatControllers.controller('HeartFatLoginCtrl', ['$scope', '$http', '$location', 'auth',
+    function ($scope, $http, $location, auth) {
+        $scope.loginFormInfo = {}
+        $scope.login = function () {
+            $http.post('/app/login', $scope.loginFormInfo).
                 success(function (data, status, header, config) {
-                    if (data.success)
-                        alert('Login successful.');
+                    if (data && data.status == 0) {
+                        auth.setUser(data.user)
+                        $location.path('/')
+                    }
                     else
                         alert('Unauthenticated.');
                 }).
