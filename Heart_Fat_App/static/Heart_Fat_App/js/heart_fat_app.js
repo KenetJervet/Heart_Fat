@@ -11,18 +11,19 @@ var heartFatApp = angular.module('heartFatApp', [
     'heartFatAnimations'
 ]);
 
-heartFatApp.factory('auth', function () {
-    var _user;
-
+heartFatApp.factory('auth', ['$cookies', function ($cookies) {
     return {
         setUser: function (user) {
-            _user = user;
+            $cookies.user = user;
+        },
+        getUser: function() {
+            return $cookies.user;
         },
         isLoggedIn: function () {
-            return !!_user;
+            return !!$cookies.user;
         }
     };
-});
+}]);
 
 heartFatApp.factory('authInterceptor', ['$log', function ($log) {
     $log.debug('Initializing auth interceptor...');
